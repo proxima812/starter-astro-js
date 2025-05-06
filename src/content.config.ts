@@ -16,7 +16,7 @@ const pages = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
-		// keyswords: z.string().default("").optional(),
+		keywords: z.string().default("").optional(),
 		ogImage: z.any().optional(),
 	}),
 })

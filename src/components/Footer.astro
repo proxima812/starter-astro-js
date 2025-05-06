@@ -1,7 +1,40 @@
 ---
+import { navigation_footer } from "@/data/data"
+import { cn } from "@/utils/cn"
+import { Icon } from "astro-icon/components"
 import Container from "./Container.astro"
 ---
 
-<footer class="bg-zinc-100 py-5">
-	<Container />
+<footer class="bg-white py-8">
+	<Container>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+			{
+				navigation_footer.map(item => {
+					const columnKey = Object.keys(item).find(key => key.startsWith("colunm"))
+					const links = item[columnKey] || []
+
+					return (
+						<div class="flex flex-col md:items-start items-center">
+							<span class="block mb-4 font-medium">{item.category}</span>
+							<nav class="flex flex-col gap-3">
+								{links.map(link => (
+									<a
+										class={cn("text-zinc-700 flex items-center gap-1", link.style)}
+										href={link.href}
+										target={link.target}
+									>
+										{link.icon && <Icon name={link.icon} />}
+										<span>{link.label}</span>
+									</a>
+								))}
+							</nav>
+						</div>
+					)
+				})
+			}
+		</div>
+		<div class="md:justify-between flex-wrap gap-3 justify-center flex items-center">
+			<span class="text-zinc-600">&copy; {new Date().getFullYear()}</span>
+		</div>
+	</Container>
 </footer>

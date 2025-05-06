@@ -1,5 +1,6 @@
 export const config = {
 	site: {
+		url: "https://example.com",
 		OG: {
 			title: "",
 			description: "",

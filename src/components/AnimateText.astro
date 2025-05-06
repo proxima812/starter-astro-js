@@ -1,0 +1,68 @@
+---
+
+---
+
+<div class="mx-auto flex flex-col text-center gap-4">
+	<h1 class="text-6xl tracking-tighter font-black">Make it move with Motion.</h1>
+
+	<p class="max-w-lg mx-auto text-lg text-zinc-800">
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, neque officiis.
+		Dolores molestiae incidunt nulla!
+	</p>
+</div>
+
+<script>
+	import { animate, stagger } from "motion"
+	import SplitType from "split-type"
+
+	const h1 = new SplitType("h1", { types: "chars" })
+	const p = new SplitType("p", { types: "lines" })
+
+	const sequence = [
+		[
+			h1.chars,
+			{
+				opacity: [0, 1],
+				y: ["30px", 0],
+				filter: ["blur(15px)", "blur(0px)"],
+			},
+			{
+				duration: 0.6,
+				delay: stagger(0.03),
+				type: "spring",
+				stiffness: 100,
+				damping: 20,
+			},
+		],
+		[
+			p.lines,
+			{
+				opacity: [0, 1],
+				y: ["10px", 0],
+				filter: ["blur(4px)", "blur(0px)"],
+			},
+			{ duration: 0.5, delay: stagger(0.5) },
+		],
+	]
+
+	animate(sequence)
+
+	// animate(
+	// 	h1.chars,
+	// 	{
+	// 		opacity: [0, 1],
+	// 		y: ["30px", 0],
+	// 		filter: ["blur(15px)", "blur(0px)"],
+	// 	},
+	// 	{ duration: 0.6, delay: stagger(0.03), type: "spring", stiffness: 100, damping: 20 },
+	// )
+	// animate(
+	// 	p.lines,
+	// 	{
+	// 		opacity: [0, 1],
+	// 		y: ["10px", 0],
+	// 		filter: ["blur(4px)", "blur(0px)"],
+	// 	},
+	// 	{ duration: 1, delay: stagger(0.5) },
+	// )
+</script>

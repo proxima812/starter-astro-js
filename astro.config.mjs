@@ -5,9 +5,10 @@ import tailwindcss from "@tailwindcss/vite"
 import icon from "astro-icon"
 import metaTags from "astro-meta-tags"
 import { defineConfig } from "astro/config"
+import { config } from "./src/config"
 
 export default defineConfig({
-	site: "https://example.com",
+	site: `${config.site.url}`,
 	vite: {
 		plugins: [tailwindcss()],
 	},
