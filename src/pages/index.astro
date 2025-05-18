@@ -5,4 +5,61 @@ import Layout from "@/layouts/Layout.astro"
 
 <Layout title="" description="">
 	<AnimateText />
+
+	<!-- <div class="bg-white border rounded-md h-screen w-full"></div> -->
+
+	<div
+		id="div"
+		class="text-center flex justify-center items-center text-8xl h-screen p-12 w-full"
+	>
+	</div>
+
+	<div
+		id="div"
+		class="flex-col gap-12 text-center flex justify-center items-center h-screen p-12 w-full"
+	>
+		<h2 class="text-8xl font-black">Jopa!</h2>
+		<span>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae sunt enim
+			doloremque ut, deleniti quis culpa ab, repellat autem voluptatem doloribus!
+			Veritatis possimus odio quisquam temporibus. Accusamus modi ex sapiente!
+		</span>
+		<div class="grid grid-cols-2 gap-3">
+			<div class="bg-red-200 rounded-xl w-[320px] h-[160px]"></div>
+			<div class="bg-red-200 rounded-xl w-[320px] h-[160px]"></div>
+			<div class="bg-red-200 rounded-xl w-[320px] h-[160px]"></div>
+			<div class="bg-red-200 rounded-xl w-[320px] h-[160px]"></div>
+		</div>
+	</div>
+
+	<script>
+		import { animate, scroll, stagger } from "motion"
+
+		// document.querySelectorAll("#div").forEach(item => {
+		// 	scroll(
+		// 		animate(
+		// 			item,
+		// 			{ y: ["-10px", "0"], opacity: [0, 1], scale: [0.9, 1] },
+		// 			{ ease: "linear" },
+		// 		),
+		// 		{
+		// 			target: item,
+		// 			offset: ["start end", "end end"],
+		// 		},
+		// 	)
+		// })
+
+		scroll(animate("#div", { y: ["-10px", "0"], scale: [0.7, 1] }, { ease: "linear" }))
+
+		scroll(animate("#div h2", { y: ["-10px", "0"], scale: [0.7, 1] }, { ease: "linear" }))
+
+		scroll(
+			animate("#div span", { y: ["-1px", "0"], scale: [0.7, 1] }, { ease: "linear" }),
+		)
+		animate(
+			".grid > div",
+			{ y: ["-10px", "0"], opacity: [0, 1] },
+			{ duration: 1, delay: stagger(0.2) },
+		)
+	</script>
 </Layout>
