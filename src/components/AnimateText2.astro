@@ -1,0 +1,83 @@
+---
+
+---
+
+<div class="mx-auto text-center">
+	<h1 id="title2" class="text-3xl mb-1">move. game. end.</h1>
+	<h1 id="title" class="text-7xl font-black mb-8">Make it move with Motion.</h1>
+
+	<p id="p1" class="max-w-4xl">
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio a molestias
+		aspernatur facilis voluptas in, eligendi sit laudantium sed placeat. Rerum facilis
+		obcaecati repellat ex quo necessitatibus provident totam nulla.
+	</p>
+</div>
+
+<script>
+	import { animate } from "motion"
+	animate(
+		"#title2",
+		{
+			opacity: [0, 1],
+			y: ["4px", 0],
+			filter: ["blur(10px)", "blur(0px)"],
+		},
+		{
+			duration: 0.6,
+			delay: 0.3,
+			stiffness: 100,
+			damping: 20,
+		},
+	)
+	animate(
+		"#title",
+		{
+			opacity: [0, 1],
+			y: ["6px", 0],
+			filter: ["blur(12px)", "blur(0px)"],
+		},
+		{
+			duration: 0.6,
+			delay: 0.3,
+			stiffness: 100,
+			damping: 10,
+		},
+	)
+
+	animate(
+		"#p1",
+		{
+			opacity: [0, 1],
+			y: ["20px", 0],
+			filter: ["blur(7px)", "blur(0px)"],
+		},
+		{
+			duration: 0.6,
+			delay: 0.35,
+			stiffness: 100,
+			damping: 20,
+		},
+	)
+
+	// const h1 = new SplitType("#title", { types: "chars" })
+
+	// const sequence = [
+	// 	[
+	// 		h1.chars,
+	// 		{
+	// 			opacity: [0, 1],
+	// 			y: ["5px", 0],
+	// 			filter: ["blur(5px)", "blur(0px)"],
+	// 		},
+	// 		{
+	// 			duration: 0.6,
+	// 			delay: stagger(0.03),
+	// 			type: "spring",
+	// 			stiffness: 100,
+	// 			damping: 20,
+	// 		},
+	// 	],
+	// ]
+
+	// animate(sequence)
+</script>

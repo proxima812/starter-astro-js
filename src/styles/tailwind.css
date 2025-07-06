@@ -14,12 +14,13 @@
   h6 {
     @apply text-balance;
   }
-
   p {
     @apply text-pretty;
   }
-
 }
+
+
+
 
 @layer components {
 

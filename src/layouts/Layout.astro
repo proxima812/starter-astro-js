@@ -1,9 +1,10 @@
 ---
-import Container from "@/components/Container.astro"
-import Footer from "@/components/Footer.astro"
-import Header from "@/components/Header.astro"
-import SEO from "@/components/SEO.astro"
+import Container from "@/components/partials/Container.astro"
+import Footer from "@/components/partials/Footer.astro"
+import Header from "@/components/partials/Header.astro"
+import SEO from "@/components/partials/SEO.astro"
 import "@/styles/tailwind.css"
+import { cn } from "@/utils/cn"
 
 interface Props {
 	title: string
@@ -43,8 +44,10 @@ const {
 			dateModified={dateModified}
 		/>
 	</head>
+
+	<!-- #f8fafc - BG охуенный -->
 	<body
-		class={`${bodyStyle || ""} flex min-h-screen flex-col text-zinc-900 bg-[#f7f7f7]`}
+		class={`${cn("flex min-h-screen flex-col text-zinc-900 bg-[#f7f7f7]", bodyStyle)}`}
 	>
 		<Header />
 		<Container class="py-20">

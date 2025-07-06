@@ -8,7 +8,10 @@ import { defineConfig } from "astro/config"
 import { config } from "./src/config"
 
 export default defineConfig({
-	site: `${config.site.url}`,
+  site: `${config.site.url}`,
+  svg: {
+    namespace: "svg",
+  },
 	vite: {
 		plugins: [tailwindcss()],
 	},

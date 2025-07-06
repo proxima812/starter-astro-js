@@ -1,0 +1,50 @@
+---
+export interface Props {
+	class?: string
+	colors?: string[]
+	speed?: number
+}
+  
+const { class: className = "", colors, speed } = Astro.props
+
+const gradient = `linear-gradient(135deg, ${colors.join(", ")}, ${colors[0]})`
+const duration = `${10 / speed}s`
+---
+
+<span class={`relative inline-block ${className}`}>
+	<span class="sr-only"><slot /></span>
+	<span
+		class="relative bg-[length:200%_auto] bg-clip-text text-transparent"
+		style={`background-image: ${gradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: aurora ${duration} ease-in-out infinite alternate;`}
+		aria-hidden="true"
+	>
+		<slot />
+	</span>
+</span>
+
+<style>
+	@import "tailwindcss";
+
+	@keyframes aurora {
+		0% {
+			background-position: 0% 50%;
+			transform: rotate(-5deg) scale(0.9);
+		}
+		25% {
+			background-position: 50% 100%;
+			transform: rotate(5deg) scale(1.1);
+		}
+		50% {
+			background-position: 100% 50%;
+			transform: rotate(-3deg) scale(0.95);
+		}
+		75% {
+			background-position: 50% 0%;
+			transform: rotate(3deg) scale(1.05);
+		}
+		100% {
+			background-position: 0% 50%;
+			transform: rotate(-5deg) scale(0.9);
+		}
+	}
+</style>

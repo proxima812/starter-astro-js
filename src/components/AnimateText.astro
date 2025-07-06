@@ -3,9 +3,9 @@
 ---
 
 <div class="mx-auto flex flex-col text-center gap-4">
-	<h1 class="text-6xl tracking-tighter font-black">Make it move with Motion.</h1>
+	<h1 id="h1" class="text-6xl tracking-tighter font-black">Make it move with Motion.</h1>
 
-	<p class="max-w-lg mx-auto text-lg text-zinc-800">
+	<p id="p" class="max-w-lg mx-auto text-lg text-zinc-800">
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, neque officiis.
 		Dolores molestiae incidunt nulla!
 	</p>
@@ -15,8 +15,8 @@
 	import { animate, stagger } from "motion"
 	import SplitType from "split-type"
 
-	const h1 = new SplitType("h1", { types: "chars" })
-	const p = new SplitType("p", { types: "lines" })
+	const h1 = new SplitType("#h1", { types: "chars" })
+	const p = new SplitType("#p", { types: "lines" })
 
 	const sequence = [
 		[

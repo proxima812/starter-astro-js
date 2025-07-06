@@ -1,0 +1,63 @@
+---
+import { cn } from "@/utils/cn"
+
+interface Props {
+	variant?: "light" | "gray" | "default"
+	outClassFirst?: string
+	outClassSecond?: string
+	innerClass?: string
+}
+
+const {
+	variant = "default",
+	outClassFirst = "",
+	outClassSecond = "",
+	innerClass = "",
+} = Astro.props
+
+const presets = {
+	default: {
+		outFirst: "",
+		outSecond: "",
+		inner: "",
+	},
+	light: {
+		outFirst: "bg-white ring-1 ring-black/5",
+		outSecond: "bg-white/80",
+		inner: "bg-white shadow-lg",
+	},
+	gray: {
+		outFirst: "bg-zinc-100 ring-1 ring-black/10",
+		outSecond: "bg-zinc-50",
+		inner: "bg-zinc-50 shadow-md",
+	},
+}
+
+const preset = presets[variant] ?? presets.default
+---
+
+<div
+	class={`${cn(
+		"-m-2 grid max-w-lg grid-cols-1 rounded-[2rem] shadow-[inset_0_0_2px_1px_#ffffff4d] ring-1 ring-black/5",
+		preset.outFirst,
+		outClassFirst,
+	)}`}
+>
+	<div
+		class={`${cn(
+			"grid grid-cols-1 rounded-[2rem] p-2 shadow-md shadow-black/5",
+			preset.outSecond,
+			outClassSecond,
+		)}`}
+	>
+		<div
+			class={`${cn(
+				"rounded-3xl p-10 ring-1 ring-black/5 lg:shadow-2xl",
+				preset.inner,
+				innerClass,
+			)}`}
+		>
+			<slot />
+		</div>
+	</div>
+</div>
