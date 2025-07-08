@@ -1,57 +1,104 @@
 ---
 import AnimateText from "@/components/AnimateText.astro"
 import AnimateText2 from "@/components/AnimateText2.astro"
+import AnimateList from "@/components/ui/AnimateList.astro"
 import AuroraText from "@/components/ui/AuroraText.astro"
+import AvatarsList from "@/components/ui/AvatarsList.astro"
+import BorderButton from "@/components/ui/buttons/BorderButton.astro"
+import SparklesButton from "@/components/ui/buttons/SparklesButton.astro"
 
+import Gradient from "@/components/ui/Gradient"
 import Link from "@/components/ui/Link.astro"
+import SnapCarousel from "@/components/ui/SnapCarousel.astro"
+import SnapCarouselAuto from "@/components/ui/SnapCarouselAuto.astro"
 import StyleBox from "@/components/ui/StyleBox.astro"
 import Layout from "@/layouts/Layout.astro"
-import { getCollection } from "astro:content"
 
-const posts = await getCollection("posts")
+const avatars = [
+	{
+		imageUrl: "https://avatars.githubusercontent.com/u/16860528",
+		profileUrl: "https://github.com/dillionverma",
+	},
+
+	{
+		imageUrl: "https://avatars.githubusercontent.com/u/106103625",
+		profileUrl: "https://github.com/BankkRoll",
+	},
+	{
+		imageUrl: "https://avatars.githubusercontent.com/u/59228569",
+		profileUrl: "https://github.com/safethecode",
+	},
+	{
+		imageUrl: "https://avatars.githubusercontent.com/u/59442788",
+		profileUrl: "https://github.com/sanjay-mali",
+	},
+	{
+		imageUrl: "https://avatars.githubusercontent.com/u/89768406",
+		profileUrl: "https://github.com/itsarghyadas",
+	},
+]
 ---
 
 <Layout bodyStyle="bg-[#f8fafc]" title="" description="">
-<main class="flex flex-col gap-[10rem]">
-  	<AnimateText />
-  	<AnimateText2 />
-  
-  	<Link href="#">Ссылка</Link>
-  
-  	<h2 class="text-8xl text-center font-bold tracking-tighter">
-  		Ship
-  		<AuroraText
-  			speed={1}
-  			colors={["#FF0080", "#7928CA", "#0070F3", "#38bdf8"]}
-  			class="text-8xl font-bold"
-  		>
-  			beautiful
-  		</AuroraText>
-  	</h2>
-  
-  
-  	<div class="flex gap-10">
-  		<StyleBox variant="default" outClassFirst="" outClassSecond="" innerClass="">
-  			<p>
-  				<b>Прозрачный стиль:</b>
-  				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis voluptatem facere
-  				eaque quas quisquam sequi perspiciatis est vitae.
-  			</p>
-  		</StyleBox>
-  		<StyleBox variant="light">
-  			<p>
-  				<b>Белый стиль:</b> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis
-  				voluptatem facere eaque quas quisquam sequi perspiciatis est vitae.
-  			</p>
-  		</StyleBox>
-  		<StyleBox variant="gray">
-  			<p>
-  				<b>Серый стиль:</b> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis
-  				voluptatem facere eaque quas quisquam sequi perspiciatis est vitae.
-  			</p>
-  		</StyleBox>
-  	</div>
-</main>
+	<div class="overflow-hidden relative h-[250px] w-full rounded-xl">
+		<h2
+			class="uppercase absolute top-1/2 left-1/2 text-white -translate-x-1/2 -translate-y-1/2 text-5xl text-center font-bold z-50 mix-blend-overlay select-none tracking-tighter"
+		>
+			Логотип Красивый
+		</h2>
+		<Gradient client:load />
+	</div>
 
+	<AnimateList />
 
+	<div class="mx-auto flex items-center gap-6">
+		<SparklesButton />
+		<BorderButton />
+	</div>
+
+	<SnapCarousel />
+	<AvatarsList avatarUrls={avatars} numPeople={54} />
+
+	<SnapCarouselAuto />
+
+	<main class="flex flex-col gap-[10rem]">
+		<AnimateText />
+		<AnimateText2 />
+
+		<Link href="#">Ссылка</Link>
+
+		<h2 class="text-8xl text-center font-bold tracking-tighter">
+			Это
+			<AuroraText
+				speed={1}
+				colors={["#FF0080", "#7928CA", "#0070F3", "#38bdf8"]}
+				class="text-8xl font-bold"
+			>
+				Красивый
+			</AuroraText>
+			Текст
+		</h2>
+
+		<div class="flex flex-wrap justify-center gap-10">
+			<StyleBox variant="default" outClassFirst="" outClassSecond="" innerClass="">
+				<p>
+					<b>Прозрачный стиль:</b>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis voluptatem facere
+					eaque quas quisquam sequi perspiciatis est vitae.
+				</p>
+			</StyleBox>
+			<StyleBox variant="light">
+				<p>
+					<b>Белый стиль:</b> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis
+					voluptatem facere eaque quas quisquam sequi perspiciatis est vitae.
+				</p>
+			</StyleBox>
+			<StyleBox variant="gray">
+				<p>
+					<b>Серый стиль:</b> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis
+					voluptatem facere eaque quas quisquam sequi perspiciatis est vitae.
+				</p>
+			</StyleBox>
+		</div>
+	</main>
 </Layout>

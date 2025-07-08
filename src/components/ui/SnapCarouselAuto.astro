@@ -1,0 +1,81 @@
+---
+const test = [
+	{
+		color: "bg-red-400",
+		text: "Первый блок",
+		img: "https://images.unsplash.com/photo-1742505709415-76b15647ae64?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+	},
+	{
+		color: "bg-blue-400",
+		text: "Второй блок",
+		img: "https://images.unsplash.com/photo-1743376272672-c130603a3af2?q=80&w=2129&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+	},
+	{
+		color: "bg-green-400",
+		text: "Третий блок",
+		img: "https://images.unsplash.com/photo-1750222382424-610417abf3b1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+	},
+	{
+		color: "bg-indigo-400",
+		text: "Четвертый блок",
+		img: "https://images.unsplash.com/photo-1749497683197-ae96f3cb92f4?q=80&w=2118&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+	},
+]
+---
+
+<div>
+	<div
+		id="carousel"
+		class="roudned-xl flex gap-4 rounded-xl overflow-x-auto scroll-smooth snap-x snap-mandatory px-4"
+		style="scrollbar-width: none;"
+	>
+		{
+			test.map(item => (
+				<div class="snap-start shrink-0 w-[60vw] relative select-none">
+					<div
+						class={`${item.color} w-full flex items-center text-white text-4xl font-bold h-[250px] rounded-xl shadow-md`}
+						style={`background-image: url(${item.img}); background-size: cover; background-position: bottom;`}
+					>
+						<p class="p-4 text-shadow-lg/30">{item.text}</p>
+					</div>
+				</div>
+			))
+		}
+	</div>
+
+	<!-- 🔘 Точки-индикаторы -->
+	<div id="dots" class="flex justify-center gap-2 mt-4">
+		{
+			test.map(() => (
+				<span class="w-2 h-2 rounded-full bg-zinc-400 opacity-40 transition-all" />
+			))
+		}
+	</div>
+</div>
+
+<script is:inline>
+	let current = 0
+	const container = document.getElementById("carousel")
+	const dots = document.querySelectorAll("#dots span")
+
+	function goToSlide(index) {
+		const slide = container.children[index]
+		if (slide) {
+			container.scrollTo({
+				left: slide.offsetLeft,
+				behavior: "smooth",
+			})
+			dots.forEach(dot => dot.classList.remove("bg-zinc-800", "opacity-100"))
+			dots[index].classList.add("bg-zinc-800", "opacity-100")
+		}
+	}
+
+	// 👇 Сразу активируем первую точку
+	goToSlide(0)
+
+	// ⏱ Автопрокрутка
+	setInterval(() => {
+		current = (current + 1) % container.children.length
+		goToSlide(current)
+	}, 2000)
+</script>

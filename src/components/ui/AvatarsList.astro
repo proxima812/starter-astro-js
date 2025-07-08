@@ -1,0 +1,36 @@
+---
+import { cn } from "@/utils/cn"
+const { avatarUrls, numPeople, class: className } = Astro.props
+
+interface Props {
+	avatarUrls: { profileUrl: string; imageUrl: string }[]
+	numPeople?: number
+	class?: string
+}
+---
+
+<div class={cn("z-10 flex -space-x-4", className)}>
+	{
+		avatarUrls.map((url, index) => (
+			<a href={url.profileUrl} target="_blank" rel="noopener noreferrer">
+				<img
+					class="h-10 w-10 rounded-full border-2 border-white 0"
+					src={url.imageUrl}
+					width={40}
+					height={40}
+					alt={`Avatar ${index + 1}`}
+				/>
+			</a>
+		))
+	}
+	{
+		(numPeople ?? 0) > 0 && (avatarUrls?.length ?? 0) >= 5 && (
+			<a
+				class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-blue-500 text-center text-xs font-medium text-white"
+				href=""
+			>
+				+{numPeople}
+			</a>
+		)
+	}
+</div>

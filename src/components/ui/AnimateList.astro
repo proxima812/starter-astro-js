@@ -1,0 +1,72 @@
+---
+const notifications = [
+	{
+		name: "Payment received",
+		description: "Magic UI",
+		time: "15m ago",
+
+		icon: "💸",
+		color: "bg-[#00C9A7]",
+	},
+	{
+		name: "User signed up",
+		description: "Magic UI",
+		time: "10m ago",
+		icon: "👤",
+		color: "bg-[#FFB800]",
+	},
+	{
+		name: "New message",
+		description: "Magic UI",
+		time: "5m ago",
+		icon: "💬",
+		color: "bg-[#FF3D71]",
+	},
+	{
+		name: "New event",
+		description: "Magic UI",
+		time: "2m ago",
+		icon: "🗞️",
+		color: "bg-[#1E86FF]",
+	},
+]
+---
+
+<div class="grid grid-cols-2 gap-3">
+	{
+		notifications &&
+			notifications.map(item => (
+				<div id="item" class="p-6 rounded-xl bg-white shadow-2xs max-w-full w-xl">
+					<div class="flex gap-3 items-center">
+						<div
+							class={`${item.color} w-12 h-12 rounded-xl flex items-center justify-center`}
+						>
+							<span class="text-xl">{item.icon}</span>
+						</div>
+						<div>
+							<h3 class="flex text-xl font-bold gap-2 items-center">
+								<span>{item.name} </span>
+								<span class="text-zinc-600 font-light text-sm">{item.time}</span>
+							</h3>
+							<p>{item.description}</p>
+						</div>
+					</div>
+				</div>
+			))
+	}
+</div>
+
+<script>
+	import { animate, stagger } from "motion"
+
+	const animation = animate(
+		"#item",
+		{
+			y: ["-20px", 0],
+
+			filter: ["blur(8px)", "blur(0px)"],
+			opacity: [0, 1],
+		},
+		{ duration: 2, delay: stagger(0.3), type: "spring", stiffness: 200, damping: 40 },
+	)
+</script>

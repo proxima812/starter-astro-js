@@ -1,0 +1,58 @@
+---
+const test = [
+	{
+		color: "bg-red-400",
+		text: "1",
+		img: "https://hoo.be/_next/image?url=%2Fhome%2Fshop-carousels.webp&w=828&q=75",
+	},
+	{
+		color: "bg-blue-400",
+		text: "2",
+		img: "https://hoo.be/_next/image?url=%2Fhome%2Fthemes-accents.webp&w=828&q=75",
+	},
+	{
+		color: "bg-green-400",
+		text: "3",
+		img: "https://hoo.be/_next/image?url=%2Fhome%2Fevent-carousels.webp&w=828&q=75",
+	},
+	{
+		color: "bg-indigo-400",
+		text: "4",
+		img: "https://hoo.be/_next/image?url=%2Fhome%2Fembeds.webp&w=828&q=75",
+	},
+	{
+		color: "bg-pink-400",
+		text: "5",
+		img: "https://hoo.be/_next/image?url=%2Fhome%2Ftips-paywalls.webp&w=828&q=75",
+	},
+]
+---
+
+<div class="relative">
+	<div
+		class="flex overflow-x-auto rounded-2xl scroll-smooth snap-x snap-mandatory px-4 gap-4"
+		style="scrollbar-width: none;"
+	>
+		{
+			test.map(item => (
+				<div class="snap-start w-[404px] flex-none relative select-none">
+					<div
+						class={`w-full h-[500px] flex items-center justify-center text-white text-4xl font-bold rounded-2xl`}
+						style={`background-image: url(${item.img}); background-size: cover; background-position: bottom;`}
+					>
+						{/* <p class="p-4 text-shadow-lg/30">{item.text}</p> */}
+					</div>
+				</div>
+			))
+		}
+	</div>
+	<div
+		class="pointer-events-none rounded-r-2xl absolute top-0 right-0 h-full w-[72px] z-50"
+		style="
+		mask-image: linear-gradient(to left, rgba(0,0,0,0.7), transparent);
+		-webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.7), transparent);
+		background-color: rgba(11, 14, 16, 0.5);
+	"
+	>
+	</div>
+</div>
