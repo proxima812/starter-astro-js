@@ -1,17 +1,17 @@
 ---
-import AnimateText from "@/components/AnimateText.astro"
-import AnimateText2 from "@/components/AnimateText2.astro"
-import AnimateList from "@/components/ui/AnimateList.astro"
-import AuroraText from "@/components/ui/AuroraText.astro"
+import AuroraText from "@/components/animate/AuroraText.astro"
+import ExemplaryList from "@/components/animate/ExemplaryList.astro"
+import PresentText from "@/components/animate/PresentText.astro"
 import AvatarsList from "@/components/ui/AvatarsList.astro"
-import BorderButton from "@/components/ui/buttons/BorderButton.astro"
-import SparklesButton from "@/components/ui/buttons/SparklesButton.astro"
-
-import Gradient from "@/components/ui/Gradient"
 import Link from "@/components/ui/Link.astro"
 import SnapCarousel from "@/components/ui/SnapCarousel.astro"
 import SnapCarouselAuto from "@/components/ui/SnapCarouselAuto.astro"
 import StyleBox from "@/components/ui/StyleBox.astro"
+import BorderButton from "@/components/ui/buttons/BorderButton.astro"
+import SparklesButton from "@/components/ui/buttons/SparklesButton.astro"
+import SocialButton from "@/components/widgets/SocialButton.astro"
+import Socials from "@/components/widgets/Socials.astro"
+import { socials } from "@/data/data"
 import Layout from "@/layouts/Layout.astro"
 
 const avatars = [
@@ -37,10 +37,30 @@ const avatars = [
 		profileUrl: "https://github.com/itsarghyadas",
 	},
 ]
+
+import SparklesText from "@/components/ui/react/SparklesText"
+import DopplerText3D from "@/components/ui/react/DopplerText3D"
 ---
 
 <Layout bodyStyle="bg-[#f8fafc]" title="" description="">
-	<div class="overflow-hidden relative h-[250px] w-full rounded-xl">
+
+
+	<!-- <div class="h-[40rem] flex items-center justify-center">
+		<TextHoverEffect client:load text="Привет!" />
+	</div> -->
+
+	<SparklesText client:load>Привет</SparklesText>
+
+	<!-- <SocialButton
+		title="YouTube"
+		href="#"
+		class="text-blue-500"
+		social="youtube"
+		aria_label="Youtube"
+	/> -->
+	<Socials data={socials} />
+
+	<!-- <div class="overflow-hidden relative h-[320px] w-full rounded-xl">
 		<h2
 			class="uppercase absolute top-1/2 left-1/2 text-white -translate-x-1/2 -translate-y-1/2 text-5xl text-center font-bold z-50 mix-blend-overlay select-none tracking-tighter"
 		>
@@ -49,7 +69,96 @@ const avatars = [
 		<Gradient client:load />
 	</div>
 
-	<AnimateList />
+	<div class="overflow-hidden relative h-[320px] w-full rounded-xl">
+		<h2
+			class="uppercase absolute top-1/2 left-1/2 text-white -translate-x-1/2 -translate-y-1/2 text-5xl text-center font-bold z-50 mix-blend-difference select-none tracking-tighter"
+		>
+			Логотип Красивый
+		</h2>
+		<Gradient
+			type="grain"
+			colors={["#0cc61b", "#fff", "#eb3333"]}
+			speed="0.5"
+			client:load
+		/>
+	</div>
+
+	<div class="overflow-hidden relative h-[320px] w-full rounded-xl">
+		<h2
+			class="uppercase absolute top-1/2 left-1/2 text-white -translate-x-1/2 -translate-y-1/2 text-5xl text-center font-bold z-50 mix-blend-overlay select-none tracking-tighter"
+		>
+			Логотип Красивый
+		</h2>
+		<Gradient type="mesh" speed="0.5" client:load />
+	</div>
+
+	<div class="overflow-hidden relative h-[320px] w-full rounded-xl">
+		<h2
+			class="uppercase absolute top-1/2 left-1/2 text-black -translate-x-1/2 -translate-y-1/2 text-5xl text-center font-bold z-50 mix-blend-overlay select-none tracking-tighter"
+		>
+			Логотип Красивый
+		</h2>
+		<Gradient
+			type="mesh"
+			colors={["#fff", "#5518fb", "#fffbbd", "#fff"]}
+			speed="0.4"
+			client:load
+		/>
+	</div>
+	<div class="overflow-hidden relative h-[320px] w-full rounded-xl">
+		<Gradient type="liquid" speed="0.4" colors={["#00042e", "#5b4dc7"]} client:load />
+	</div>
+
+	<section class="flex gap-4 items-center justify-center">
+		<div class="overflow-hidden relative h-[250px] w-full rounded-xl">
+			<h2
+				class="uppercase absolute top-1/2 left-1/2 text-white -translate-x-1/2 -translate-y-1/2 text-3xl text-center font-bold z-50 mix-blend-overlay select-none tracking-tighter"
+			>
+				mix-blend-overlay
+			</h2>
+			<Gradient
+				colorBack="#8a90d6"
+				colorTint="#5b4dc7"
+				type="liquid"
+				speed="1"
+				client:load
+			/>
+		</div>
+		<div class="overflow-hidden relative h-[250px] w-full rounded-xl">
+			<h2
+				class="uppercase absolute top-1/2 left-1/2 text-white -translate-x-1/2 -translate-y-1/2 text-3xl text-center font-bold z-50 mix-blend-difference select-none tracking-tighter"
+			>
+				mix-blend-difference
+			</h2>
+			<Gradient
+				colorBack="#e2f4e6"
+				colorTint="#32c3a3"
+				type="liquid"
+				speed="1"
+				client:load
+			/>
+		</div>
+		<div class="overflow-hidden relative h-[250px] w-full rounded-xl">
+			<h2
+				class="uppercase absolute top-1/2 left-1/2 text-pink-100 -translate-x-1/2 -translate-y-1/2 text-3xl text-center font-bold z-50 mix-blend-exclusion select-none tracking-tighter"
+			>
+				mix-blend-exclusion
+			</h2>
+			<Gradient
+				colorBack="#da944929"
+				colorTint="#fff"
+				type="liquid"
+				speed="1"
+				client:load
+			/>
+		</div>
+	</section> -->
+
+	<!-- <MorphText /> -->
+
+	<!-- <PresentText /> -->
+
+	<ExemplaryList />
 
 	<div class="mx-auto flex items-center gap-6">
 		<SparklesButton />
@@ -62,10 +171,10 @@ const avatars = [
 	<SnapCarouselAuto />
 
 	<main class="flex flex-col gap-[10rem]">
-		<AnimateText />
-		<AnimateText2 />
+		<!-- <AnimateText />
+		<AnimateText2 /> -->
 
-		<Link href="#">Ссылка</Link>
+		<!-- <Link href="#">Ссылка</Link> -->
 
 		<h2 class="text-8xl text-center font-bold tracking-tighter">
 			Это

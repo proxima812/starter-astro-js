@@ -1,0 +1,23 @@
+---
+const { data } = Astro.props
+import SocialButton from "./SocialButton.astro"
+
+interface Props {
+	data: any
+}
+---
+
+<div class="flex items-center gap-3">
+	{
+		data &&
+			data.map((item: any) => (
+				<SocialButton
+					class=""
+					title={item.title}
+					href={item.href}
+					social={item.social}
+					aria_label={item.aria_label}
+				/>
+			))
+	}
+</div>

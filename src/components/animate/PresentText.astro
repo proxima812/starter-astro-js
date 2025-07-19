@@ -1,0 +1,45 @@
+---
+
+---
+
+<h1 class="h2 uppercase flex flex-col gap-3 text-center text-8xl tracking-tighter">
+	<span
+		class="font-medium text-transparent bg-clip-text bg-gradient-to-t from-zinc-500 to-slate-500"
+		>живите</span
+	>
+	<span
+		class="font-black text-transparent bg-clip-text bg-gradient-to-b from-red-600 via-red-400 to-amber-600"
+		>миром</span
+	>
+	<span
+		class="font-medium text-transparent bg-clip-text bg-gradient-to-b from-zinc-500 to-slate-500"
+		>гордо</span
+	>
+</h1>
+<h1 class="h1 my-20 text-center font-bold text-8xl tracking-tighter">
+	Just publish it with Framer
+</h1>
+
+<script>
+	import { animate, stagger } from "motion"
+	import SplitType from "split-type"
+
+	// type lines const h1_lines= SplitType("#h1", { types: "lines" })
+	const texth1 = new SplitType(".h1", { types: "chars" })
+	const texth2 = new SplitType(".h2", { types: "lines" })
+
+	animate(
+		texth1.chars,
+		{ opacity: [0, 1], y: ["-5px", 0] },
+		{ duration: 0.3, delay: stagger(0.1) },
+	)
+	animate(
+		texth2.lines,
+		{
+			opacity: [0, 1],
+			filter: ["blur(2px)", 0],
+			y: ["10px", 0],
+		},
+		{ duration: 0.4, delay: stagger(0.2) },
+	)
+</script>
