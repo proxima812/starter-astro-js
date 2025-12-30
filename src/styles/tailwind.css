@@ -6,16 +6,32 @@
 }
 
 @layer base {
+  *,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  margin: 0;
+  padding: 0;
+}
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
+  border: 0 solid;
+}
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply text-balance;
+    @apply text-balance antialiased md:subpixel-antialiased ;
   }
   p {
-    @apply text-pretty;
+    @apply text-pretty antialiased md:subpixel-antialiased;
   }
 }
 
