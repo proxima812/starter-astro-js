@@ -17,10 +17,8 @@ const {
 function formatCanonicalURL(url: string | URL) {
 	const path = url.toString()
 	const hasQueryParams = path.includes("?")
-	if (hasQueryParams) {
-		path.replace(/\/?$/, "")
-	}
-	return path.replace(/\/?$/, hasQueryParams ? "" : "/")
+
+	return hasQueryParams ? path.replace(/\/$/, "") : path.replace(/\/?$/, "/")
 }
 
 const socialImageURL = new URL(
@@ -28,8 +26,12 @@ const socialImageURL = new URL(
 	Astro.url,
 ).href
 
-const mainTitle = title + " • " + "TITLE" || config.site.OG.title
-const mainDescription = description + " • " + "DESCRIPTION" || config.site.OG.description
+const mainTitle = title ? `${title} • TITLE` : config.site.OG.title
+
+const mainDescription = description
+	? `${description} • DESCRIPTION`
+	: config.site.OG.description
+
 const mainAuthor = author || config.site.OG.author
 const mainOGImage = socialImageURL || config.site.OG.defaultImage
 
@@ -43,20 +45,32 @@ const jsonLd = {
 	headline: mainTitle,
 	description: mainDescription,
 	keywords: keywords || config.site.OG.keywords,
+	inLanguage: locale || config.site.OG.locale,
+	url: formatCanonicalURL(canonicalURL),
+	image: mainOGImage,
 	author: {
 		"@type": "Person",
 		name: mainAuthor,
 		url: Astro.site,
 	},
-	// datePublished: formatDateToYYYYMMDD(datePublished || new Date()),
-	inLanguage: locale || config.site.OG.locale,
-	// TODO include cover image here
+	publisher: {
+		"@type": "Organization",
+		name: config.site.name,
+		logo: {
+			"@type": "ImageObject",
+			url: `${Astro.site}logo.png`,
+		},
+	},
+	...(datePublished && {
+		datePublished: formatDateToYYYYMMDD(new Date(datePublished)),
+		dateModified: formatDateToYYYYMMDD(new Date()),
+	}),
 }
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
 <meta name="generator" content={Astro.generator} />
 {canonicalURL && <link rel="canonical" href={formatCanonicalURL(canonicalURL)} />}
 <title>{mainTitle}</title>
@@ -86,19 +100,19 @@ const jsonLd = {
 <meta property="twitter:title" content={mainTitle} />
 <meta property="twitter:description" content={mainDescription} />
 <meta property="twitter:image" content={mainOGImage} />
-{
-	indexRobots === false ? (
-		<meta name="robots" content="noindex, nofollow" />
-	) : (
-		<meta name="robots" content="index, follow" />
-	)
-}
+<meta
+	name="robots"
+	content={indexRobots === false
+		? "noindex, nofollow"
+		: "index, follow, max-image-preview:large"}
+/>
+
 <link type="text/plain" rel="author" href={`${Astro.site}humans.txt`} />
 <link
 	rel="alternate"
 	type="application/rss+xml"
-	title="RSS центров"
-	href={new URL("centers/rss.xml", Astro.site)}
+	title="RSS"
+	href={new URL("/posts/rss.xml", Astro.site)}
 />
 
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -115,6 +129,44 @@ const jsonLd = {
 		)
 }
 <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<!-- =========================
+	FAVICON / APP ICONS
+	Рекомендуемые размеры
+========================= -->
+
+<!-- Классический favicon (старые браузеры, fallback)
+	Файл: /favicon.ico
+	Внутри .ico желательно иметь:
+	16x16, 32x32, 48x48 -->
+<link rel="icon" href="/favicon.ico" sizes="any" />
+
+<!-- SVG favicon (современные браузеры, идеальный вариант)
+	Файл: /favicon.svg
+	Векторный, масштабируется без потери качества -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+<!-- Apple Touch Icon (iOS: Safari, добавление на экран)
+	Файл: /apple-touch-icon.png
+	Рекомендуемый размер: 180x180 -->
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Web App Manifest (Android, PWA, Chrome, Edge)
+	Файл: /site.webmanifest
+	Иконки внутри manifest:
+	- 192x192 (обязательно)
+	- 512x512 (обязательно) -->
+<link rel="manifest" href="/site.webmanifest" />
+
+<!--
+/public
+├─ favicon.ico          → 16x16, 32x32, 48x48 (в одном файле)
+├─ favicon.svg          → SVG
+├─ apple-touch-icon.png → 180x180
+├─ icon-192.png         → 192x192 (Android / PWA)
+├─ icon-512.png         → 512x512 (Android / PWA)
+└─ site.webmanifest
+-->
 
 <!--
 Design and development by:

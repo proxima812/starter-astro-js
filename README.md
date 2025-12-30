@@ -1,1 +1,1 @@
-# my starter astro 5.11
+# my starter astro project with components 5.16 (31.12.2025)

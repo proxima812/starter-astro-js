@@ -1,5 +1,5 @@
 ---
-import { navigation_footer } from "@/data/data"
+import { navigation_footer } from "@/data/navigation_footer"
 import { cn } from "@/utils/cn"
 import { Icon } from "astro-icon/components"
 import Container from "./Container.astro"
@@ -9,10 +9,16 @@ import Container from "./Container.astro"
 	<hr
 		class="h-px w-full border-0 bg-gradient-to-r from-transparent via-gray-200 to-transparent"
 	/>
+
 	<div class="py-8 bg-white">
 		<Container>
 			<div
-				class="justify-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14"
+				class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+					gap-8 mb-16
+					/* управление колонками */
+					[&>*:nth-child(3n+1)]:lg:justify-self-start
+					[&>*:nth-child(3n+2)]:lg:justify-self-center
+					[&>*:nth-child(3n)]:lg:justify-self-end"
 			>
 				{
 					navigation_footer.map(item => {
@@ -20,13 +26,17 @@ import Container from "./Container.astro"
 						const links = columnKey ? item[columnKey] : []
 
 						return (
-							<div class="flex flex-col md:items-start items-center">
-								<span class="block mb-4 font-medium">{item.category}</span>
-								<nav class="flex flex-col gap-3">
+							<div class="flex flex-col items-center lg:items-start">
+								<span class="mb-4 font-medium text-zinc-900">{item.category}</span>
+
+								<nav class="flex flex-col gap-3 lg:items-start items-center">
 									{Array.isArray(links) &&
 										links.map(link => (
 											<a
-												class={cn("text-zinc-700 flex items-center gap-1", link.style)}
+												class={cn(
+													"text-zinc-700 flex items-center gap-1 transition-colors hover:text-zinc-900",
+													link.style,
+												)}
 												href={link.href}
 												target={link.target}
 											>
@@ -40,9 +50,13 @@ import Container from "./Container.astro"
 					})
 				}
 			</div>
-
-			<div class="md:justify-between flex-wrap gap-3 justify-center flex items-center">
-				<span class="text-zinc-600">&copy; {new Date().getFullYear()}</span>
+			<hr
+				class="h-px w-full border-0 bg-gradient-to-b from-transparent via-gray-200 to-transparent mb-8"
+			/>
+			<div class="flex flex-wrap items-center justify-center md:justify-between gap-3">
+				<span class="text-zinc-600">
+					&copy; {new Date().getFullYear()}
+				</span>
 			</div>
 		</Container>
 	</div>

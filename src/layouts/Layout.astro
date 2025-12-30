@@ -6,6 +6,7 @@ import SEO from "@/components/partials/SEO.astro"
 
 import "@/styles/tailwind.css"
 import { cn } from "@/utils/cn"
+import { ClientRouter } from "astro:transitions"
 
 interface Props {
 	title: string
@@ -46,26 +47,28 @@ const {
 			datePublished={datePublished}
 			dateModified={dateModified}
 		/>
+    <ClientRouter>
 	</head>
 
-	<!-- #f8fafc и #eceef1 - BG красивый -->
-	<body
-		class={`${cn("flex min-h-screen flex-col text-zinc-900 bg-[#f7f7f7]", bodyStyle)}`}
-	>
-		<Header />
-		{
-			containerOff ? (
-				<div class="flex flex-col gap-12">
-					<slot />
-				</div>
-			) : (
-				<Container class="py-20">
+		<!-- #f8fafc и #eceef1 - BG красивый -->
+		<body
+			class={`${cn("flex min-h-screen flex-col text-zinc-900 bg-[#f7f7f7]", bodyStyle)}`}
+		>
+			<Header />
+			{
+				containerOff ? (
 					<div class="flex flex-col gap-12">
 						<slot />
 					</div>
-				</Container>
-			)
-		}
-		<Footer />
-	</body>
+				) : (
+					<Container class="py-20">
+						<div class="flex flex-col gap-12">
+							<slot />
+						</div>
+					</Container>
+				)
+			}
+			<Footer />
+		</body>
+	</ClientRouter>
 </html>
