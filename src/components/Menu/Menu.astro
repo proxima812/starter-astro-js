@@ -11,24 +11,34 @@ import { Icon } from "astro-icon/components"
 	/>
 </nav>
 
+<!-- MOBILE BUTTON -->
 <button
+	id="menu-toggle"
+	type="button"
 	title="Мобильное меню"
-	id="open"
-	class="text-white md:hidden w-[40px] h-[36px] justify-center flex items-center bg-zinc-800 py-1.5 rounded-lg"
-	aria-controls="menu"
+	class="md:hidden w-[40px] h-[36px] flex items-center justify-center
+	       bg-zinc-800 rounded-lg text-white"
+	aria-controls="mobile-menu"
 	aria-expanded="false"
 >
 	<Icon name="mdi:menu-open" class="text-xl" />
 	<span class="sr-only">Мобильное меню</span>
 </button>
 
+<!-- MOBILE MENU -->
 <div
-	id="menu"
-	class="hidden absolute w-full p-12 justify-center flex items-start h-full bg-black/60 backdrop-blur-2xl md:-z-10 z-50 top-[75px] left-0 transition-all duration-300 ease-in-out"
-	role="menu"
+	id="mobile-menu"
+	role="dialog"
+	aria-modal="true"
 	aria-hidden="true"
+	class="fixed inset-x-0 top-[75px] z-50 h-[calc(100dvh-75px)]
+		bg-black/60 backdrop-blur-2xl
+		flex justify-center items-start p-12
+		opacity-0 pointer-events-none
+		transition-all duration-300 ease-out"
+	style="view-transition-name: mobile-menu"
 >
-	<nav class="flex flex-col gap-5 items-start">
+	<nav class="flex flex-col gap-6 items-start">
 		<NavList
 			navigation={navigation}
 			className="text-white text-2xl flex items-center gap-1"
@@ -36,27 +46,79 @@ import { Icon } from "astro-icon/components"
 	</nav>
 </div>
 
-<script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const menu = document.querySelector("#menu")
-		const menuBtn = document.querySelector("#open")
-		const body = document.querySelector("body")
-		const menunavigation = document.querySelectorAll("#menu a")
+<script data-astro-exec>
+	const toggle = document.getElementById("menu-toggle")
+	const menu = document.getElementById("mobile-menu")
+	const body = document.body
 
-		menunavigation.forEach(link => {
-			link.addEventListener("click", () => {
-				menu?.classList.add("hidden")
-				body?.classList.remove("overflow-hidden")
-				menuBtn?.setAttribute("aria-expanded", "false")
-				menu?.setAttribute("aria-hidden", "true")
-			})
-		})
+	const openMenu = () => {
+		menu?.setAttribute("data-open", "")
+		menu?.setAttribute("aria-hidden", "false")
+		toggle?.setAttribute("aria-expanded", "true")
+		body.classList.add("overflow-hidden")
+	}
 
-		menuBtn?.addEventListener("click", () => {
-			const isHidden = menu?.classList.toggle("hidden")
-			body?.classList.toggle("overflow-hidden")
-			menuBtn?.setAttribute("aria-expanded", !isHidden)
-			menu?.setAttribute("aria-hidden", isHidden)
-		})
+	const closeMenu = () => {
+		menu?.removeAttribute("data-open")
+		menu?.setAttribute("aria-hidden", "true")
+		toggle?.setAttribute("aria-expanded", "false")
+		body.classList.remove("overflow-hidden")
+	}
+
+	toggle?.addEventListener("click", () => {
+		const isOpen = menu?.hasAttribute("data-open")
+		isOpen ? closeMenu() : openMenu()
 	})
+
+	// Закрытие при клике по ссылке
+	menu?.addEventListener("click", e => {
+		if (e.target.closest("a")) closeMenu()
+	})
+
+	// 💡 КЛЮЧЕВОЕ: закрываем меню при навигации Astro
+	// document.addEventListener("astro:before-preparation", closeMenu)
 </script>
+
+<style>
+	/* MOBILE MENU STATES */
+	#mobile-menu[data-open] {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+	}
+
+	#mobile-menu {
+		transform: translateY(-8px);
+	}
+
+	/* View Transitions animation */
+	@keyframes menu-fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(-12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes menu-fade-out {
+		from {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		to {
+			opacity: 0;
+			transform: translateY(-12px);
+		}
+	}
+
+	::view-transition-old(mobile-menu) {
+		animation: menu-fade-out 150ms ease-in forwards;
+	}
+
+	::view-transition-new(mobile-menu) {
+		animation: menu-fade-in 250ms ease-out forwards;
+	}
+</style>
