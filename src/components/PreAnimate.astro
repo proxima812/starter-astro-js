@@ -1,0 +1,171 @@
+---
+
+---
+
+<div class="overflow-hidden isolate relative rounded-3xl">
+	<div class="cosmic-core absolute inset-0"></div>
+	<div class="cosmic-noise"></div>
+	<div class="cosmic-glow"></div>
+	<div class="gravity-field"></div>
+
+	<div
+		class="relative py-12 z-10 text-[25rem] text-center font-bold uppercase leading-[0.8] text-transparent bg-clip-text bg-gradient-to-b from-transparent to-white/80 backdrop-blur-3xl backdrop-brightness-90"
+	>
+		LOVE
+	</div>
+</div>
+
+<style>
+	/* ===============================
+   COSMIC PORTAL — FINAL
+   =============================== */
+
+	/* ---------- SPECTRUM CORE ---------- */
+	@keyframes spectrum {
+		0% {
+			--h1: 200;
+			--h2: 260;
+			--h3: 320;
+		}
+		50% {
+			--h1: 240;
+			--h2: 300;
+			--h3: 20;
+		}
+		100% {
+			--h1: 200;
+			--h2: 260;
+			--h3: 320;
+		}
+	}
+
+	@keyframes phase-drift {
+		0% {
+			transform: scale(1) rotate(0deg);
+		}
+		50% {
+			transform: scale(1.05) rotate(0.25deg);
+		}
+		100% {
+			transform: scale(1) rotate(0deg);
+		}
+	}
+
+	.cosmic-core {
+		--h1: 200;
+		--h2: 260;
+		--h3: 320;
+
+		position: absolute;
+		inset: 0;
+
+		background:
+			radial-gradient(
+				120% 80% at 50% 100%,
+				hsla(var(--h1), 90%, 65%, 0.35),
+				transparent 60%
+			),
+			radial-gradient(
+				80% 60% at 20% 80%,
+				hsla(var(--h2), 90%, 60%, 0.25),
+				transparent 70%
+			),
+			radial-gradient(
+				60% 50% at 80% 90%,
+				hsla(var(--h3), 90%, 60%, 0.25),
+				transparent 75%
+			);
+
+		animation:
+			spectrum 22s ease-in-out infinite,
+			phase-drift 18s ease-in-out infinite;
+
+		filter: saturate(1.45) contrast(1.12);
+		will-change: transform, filter;
+	}
+
+	/* ---------- COSMIC GLOW ---------- */
+	@keyframes glow-pulse {
+		0%,
+		100% {
+			opacity: 0.55;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.08);
+		}
+	}
+
+	.cosmic-glow {
+		position: absolute;
+		inset: 0;
+
+		background: radial-gradient(
+			circle at 50% 100%,
+			rgba(255, 255, 255, 0.4),
+			transparent 65%
+		);
+
+		mix-blend-mode: screen;
+		filter: blur(26px);
+		animation: glow-pulse 9s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	/* ---------- GRAVITY FIELD ---------- */
+	@keyframes gravity {
+		0% {
+			backdrop-filter: blur(18px);
+		}
+		50% {
+			backdrop-filter: blur(44px);
+		}
+		100% {
+			backdrop-filter: blur(18px);
+		}
+	}
+
+	.gravity-field {
+		position: absolute;
+		inset: 0;
+
+		backdrop-filter: blur(32px);
+		-webkit-backdrop-filter: blur(32px);
+
+		mask-image: linear-gradient(
+			to bottom,
+			transparent 0%,
+			black 45%,
+			black 75%,
+			transparent 100%
+		);
+		mask-repeat: no-repeat;
+		mask-size: 100% 100%;
+
+		animation: gravity 14s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	/* ---------- OPTIONAL: STAR NOISE ---------- */
+	.cosmic-noise {
+		position: absolute;
+		inset: 0;
+
+		background: rgba(255, 255, 255, 0.04);
+		filter: url(#noise);
+		mix-blend-mode: overlay;
+		opacity: 0.25;
+
+		pointer-events: none;
+	}
+
+	/* ---------- ACCESSIBILITY / PERFORMANCE ---------- */
+	@media (prefers-reduced-motion: reduce) {
+		.cosmic-core,
+		.cosmic-glow,
+		.gravity-field {
+			animation: none;
+		}
+	}
+</style>

@@ -33,11 +33,26 @@
   p {
     @apply text-pretty antialiased md:subpixel-antialiased;
   }
+  
 }
 
 
 @layer components {
-  
+
+
+  @keyframes hue {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+	100% {
+		filter: hue-rotate(360deg);
+	}
 }
+.hue {
+	animation: hue 33s linear infinite;
+}
+
+}
+
 
 
