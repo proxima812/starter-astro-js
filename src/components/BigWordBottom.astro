@@ -1,11 +1,27 @@
+---
+import { cn } from "@/utils/cn"
+
+interface Props {
+	className?: string
+	color1?: string
+	color2?: string
+	text?: string
+}
+
+const { className, color1 = "from-zinc-500", color2 = "to-slate-500", text } = Astro.props
+---
+
 <div
 	class="relative after:absolute after:inset-0 after:h-full after:bg-linear-to-b after:from-transparent after:to-white md:mt-12"
 >
 	<div class="overflow-hidden text-[clamp(1rem,90%,25rem)]">
 		<div
-			class="hue text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-slate-500 responsive-brand-text mx-auto text-center leading-[0.8] font-black uppercase max-md:py-5"
+			class={cn(
+				`text-transparent bg-clip-text bg-gradient-to-r ${color1} ${color2} responsive-brand-text mx-auto text-center leading-[0.8] font-black uppercase max-md:py-5`,
+				className,
+			)}
 		>
-			logotype
+			{text || "logotype"}
 		</div>
 		<div
 			class="pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-[calc(50%+1.5rem)] w-full"
